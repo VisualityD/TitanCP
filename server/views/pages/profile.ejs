@@ -1,0 +1,214 @@
+<%- 
+  include('../layout', {
+    body: `
+      <!-- Заголовок профиля -->
+      <div class="profile-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h1 id="profileUsername">Загрузка...</h1>
+              <p class="lead mb-0" id="profileEmail"></p>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <span class="badge bg-warning account-badge" id="accountTypeBadge">Загрузка...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <!-- Основная информация -->
+          <div class="col-lg-4 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-info-circle"></i> Информация аккаунта</h5>
+              </div>
+              <div class="card-body">
+                <div id="accountInfo">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>ID аккаунта:</span>
+                    <strong id="accountId">-</strong>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Тип аккаунта:</span>
+                    <strong id="accountType">-</strong>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Количество входов:</span>
+                    <strong id="loginCount">-</strong>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Последний вход:</span>
+                    <strong id="lastLogin">-</strong>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Последний IP:</span>
+                    <strong id="lastIp">-</strong>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Слотов персонажей:</span>
+                    <strong id="characterSlots">-</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Управление аккаунтом -->
+            <div class="card mt-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-gear"></i> Управление</h5>
+              </div>
+              <div class="card-body">
+                <button class="btn btn-outline-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#emailModal">
+                  <i class="bi bi-envelope"></i> Изменить Email
+                </button>
+                <button class="btn btn-outline-secondary w-100">
+                  <i class="bi bi-shield-lock"></i> Смена пароля
+                </button>
+              </div>
+            </div>
+
+            <!-- Административные функции -->
+            ${user && user.groupId === 99 ? `
+            <div class="card mt-4 border-warning">
+              <div class="card-header bg-warning text-dark">
+                <h5 class="card-title mb-0"><i class="bi bi-shield-check"></i> Администратор</h5>
+              </div>
+              <div class="card-body">
+                <button class="btn btn-warning w-100 mb-2" data-bs-toggle="modal" data-bs-target="#createCharModal">
+                  <i class="bi bi-plus-circle"></i> Создать персонажа
+                </button>
+                <button class="btn btn-outline-warning w-100 mb-2">
+                  <i class="bi bi-people"></i> Управление пользователями
+                </button>
+                <button class="btn btn-outline-warning w-100">
+                  <i class="bi bi-server"></i> Настройки сервера
+                </button>
+              </div>
+            </div>
+            ` : ''}
+          </div>
+
+          <!-- Персонажи -->
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0"><i class="bi bi-people"></i> Персонажи</h5>
+                ${user && user.groupId === 99 ? `<span class="badge bg-warning">Админ-режим</span>` : ''}
+              </div>
+              <div class="card-body">
+                <div id="charactersList" class="row g-3">
+                  <div class="col-12 text-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Загрузка...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модальное окно смены email -->
+      <div class="modal fade" id="emailModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Изменение Email</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form id="emailForm">
+                <div class="mb-3">
+                  <label for="newEmail" class="form-label">Новый Email</label>
+                  <input type="email" class="form-control" id="newEmail" required>
+                </div>
+                <div class="alert alert-danger d-none" id="emailError"></div>
+                <button type="submit" class="btn btn-primary w-100">Сохранить</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модальное окно создания персонажа (только для админов) -->
+      ${user && user.groupId === 99 ? `
+      <div class="modal fade" id="createCharModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Создание персонажа (Админ)</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form id="createCharForm">
+                <div class="mb-3">
+                  <label for="charName" class="form-label">Имя персонажа</label>
+                  <input type="text" class="form-control" id="charName" required maxlength="30" placeholder="Введите имя персонажа">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Начальный класс</label>
+                  <div class="row">
+                    <div class="col-6 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charClass" id="classNovice" value="0" checked>
+                        <label class="form-check-label" for="classNovice">
+                          <i class="bi bi-person"></i> Новичок
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charClass" id="classSwordman" value="1">
+                        <label class="form-check-label" for="classSwordman">
+                          <i class="bi bi-shield"></i> Мечник
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charClass" id="classMage" value="2">
+                        <label class="form-check-label" for="classMage">
+                          <i class="bi bi-magic"></i> Волшебник
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charClass" id="classArcher" value="3">
+                        <label class="form-check-label" for="classArcher">
+                          <i class="bi bi-bullseye"></i> Лучник
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charClass" id="classMerchant" value="4">
+                        <label class="form-check-label" for="classMerchant">
+                          <i class="bi bi-cart"></i> Торговец
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charClass" id="classThief" value="5">
+                        <label class="form-check-label" for="classThief">
+                          <i class="bi bi-eye-slash"></i> Вор
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="alert alert-danger d-none" id="createCharError"></div>
+                <button type="submit" class="btn btn-success w-100">Создать персонажа</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      ` : ''}
+    `
+  })
+%>

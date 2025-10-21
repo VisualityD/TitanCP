@@ -1,0 +1,223 @@
+<%-
+  include('../layout', {
+    body: `
+<div class="container-fluid py-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 bg-dark text-white vh-100 position-fixed">
+            <div class="p-3">
+                <h4 class="text-center mb-4">
+                    <i class="bi bi-shield-check"></i> Админ-панель
+                </h4>
+                <ul class="nav nav-pills flex-column" id="adminTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard">
+                            <i class="bi bi-speedometer2"></i> Дашборд
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="site-tab" data-bs-toggle="tab" href="#site">
+                            <i class="bi bi-globe"></i> Управление сайтом
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="users-tab" data-bs-toggle="tab" href="#users">
+                            <i class="bi bi-people"></i> Пользователи
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="characters-tab" data-bs-toggle="tab" href="#characters">
+                            <i class="bi bi-person-plus"></i> Создание персонажей
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="col-md-9 col-lg-10 ms-auto">
+            <div class="tab-content p-4">
+                <!-- Дашборд -->
+                <div class="tab-pane fade show active" id="dashboard">
+                    <h2 class="mb-4">Дашборд</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Пользователи</h5>
+                                    <h2 class="display-4" id="totalUsers">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Персонажи</h5>
+                                    <h2 class="display-4" id="totalChars">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-body">
+                                    <h5 class="card-title">Онлайн</h5>
+                                    <h2 class="display-4" id="onlineChars">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Управление сайтом -->
+                <div class="tab-pane fade" id="site">
+                    <h2 class="mb-4">Управление сайтом</h2>
+                    <form id="siteSettingsForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Основные настройки</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Название сайта</label>
+                                            <input type="text" class="form-control" name="site_title" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Заголовок приветствия</label>
+                                            <input type="text" class="form-control" name="welcome_title" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Подзаголовок приветствия</label>
+                                            <textarea class="form-control" name="welcome_subtitle" rows="3" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Настройки сервера</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">IP сервера</label>
+                                            <input type="text" class="form-control" name="server_ip" required>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Login порт</label>
+                                                    <input type="number" class="form-control" name="login_port" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Char порт</label>
+                                                    <input type="number" class="form-control" name="char_port" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Map порт</label>
+                                                    <input type="number" class="form-control" name="map_port" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить настройки</button>
+                    </form>
+                </div>
+
+                <!-- Управление пользователями -->
+                <div class="tab-pane fade" id="users">
+                    <h2 class="mb-4">Управление пользователями</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="usersTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Логин</th>
+                                            <th>Email</th>
+                                            <th>Пол</th>
+                                            <th>Группа</th>
+                                            <th>Статус</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usersTableBody">
+                                        <!-- Данные загружаются через JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Создание персонажей -->
+                <div class="tab-pane fade" id="characters">
+                    <h2 class="mb-4">Создание персонажей</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Создать персонажа</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="createCharForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">ID аккаунта</label>
+                                            <input type="number" class="form-control" id="adminAccountId" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Имя персонажа</label>
+                                            <input type="text" class="form-control" id="adminCharName" required maxlength="30">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Класс</label>
+                                            <select class="form-select" id="adminCharClass" required>
+                                                <option value="0">Новичок</option>
+                                                <option value="1">Мечник</option>
+                                                <option value="2">Волшебник</option>
+                                                <option value="3">Лучник</option>
+                                                <option value="4">Торговец</option>
+                                                <option value="5">Вор</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Создать персонажа</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно персонажей пользователя -->
+<div class="modal fade" id="userCharactersModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Персонажи пользователя</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="userCharactersList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/admin.js"></script>
+
+    `
+  })
+%>

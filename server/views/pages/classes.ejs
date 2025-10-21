@@ -1,0 +1,66 @@
+<%-
+  include('../layout', {
+    body: `
+      <section class="hero-section text-center">
+        <div class="container">
+          <h1 class="display-4 fw-bold mb-4">Классы Ragnarok Online</h1>
+          <p class="lead mb-5">Выберите свой путь в мире Midgard</p>
+        </div>
+      </section>
+
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-5">Основные классы</h2>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-dark text-white py-4">
+                  <i class="bi bi-shield-slash fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Мечники</h5>
+                  <p class="card-text">Сильные воины ближнего боя, специализирующиеся на защите и атаке.</p>
+                  <div class="mt-auto">
+                    <span class="badge bg-dark">Рыцарь</span>
+                    <span class="badge bg-dark">Паладин</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-primary text-white py-4">
+                  <i class="bi bi-magic fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Волшебники</h5>
+                  <p class="card-text">Мастера магических искусств, контролирующие стихии и наносящие огромный урон.</p>
+                  <div class="mt-auto">
+                    <span class="badge bg-primary">Волшебник</span>
+                    <span class="badge bg-primary">СageMaker</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-success text-white py-4">
+                  <i class="bi bi-bullseye fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Лучники</h5>
+                  <p class="card-text">Меткие стрелки, атакующие с дальних дистанций с высокой точностью.</p>
+                  <div class="mt-auto">
+                    <span class="badge bg-success">Охотник</span>
+                    <span class="badge bg-success">Бард</span>
+                    <span class="badge bg-success">Танцовщица</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `
+  })
+%>

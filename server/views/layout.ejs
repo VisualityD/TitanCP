@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+    <!-- Навигационная панель -->
+    <%- include('partials/navbar') %>
+
+    <!-- Основной контент -->
+    <main>
+        <%- body %>
+    </main>
+
+    <!-- Футер -->
+    <%- include('partials/footer') %>
+
+    <!-- Модальные окна -->
+    <%- include('partials/modals') %>
+
+    <!-- Toast уведомления -->
+    <%- include('partials/toast') %>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Main JS -->
+    <script src="/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <% if (page === 'home') { %>
+        <script src="/js/auth.js"></script>
+    <% } %>
+    <% if (page === 'profile') { %>
+        <script src="/js/profile.js"></script>
+    <% } %>
+	    <% if (page === 'admin') { %>
+        <script src="/js/admin.js"></script>
+    <% } %>
+</body>
+</html>

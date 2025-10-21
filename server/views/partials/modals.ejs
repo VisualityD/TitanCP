@@ -1,0 +1,95 @@
+<!-- Модальные окна -->
+<!-- Модальное окно входа -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Вход в аккаунт</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label for="loginUsername" class="form-label">Логин</label>
+                        <input type="text" class="form-control" id="loginUsername" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Запомнить меня</label>
+                    </div>
+                    <div class="alert alert-danger d-none" id="loginError"></div>
+                    <button type="submit" class="btn btn-danger w-100">Войти</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="#" class="text-decoration-none">Забыли пароль?</a>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p class="mb-0">Нет аккаунта? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal" class="text-decoration-none">Зарегистрируйтесь</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно регистрации -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Регистрация аккаунта</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="mb-3">
+                        <label for="regUsername" class="form-label">Логин</label>
+                        <input type="text" class="form-control" id="regUsername" required minlength="4" maxlength="23">
+                        <div class="form-text">От 4 до 23 символов (латинские буквы и цифры)</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regPassword" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="regPassword" required minlength="6">
+                        <div class="form-text">Минимум 6 символов</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regPasswordConfirm" class="form-label">Подтверждение пароля</label>
+                        <input type="password" class="form-control" id="regPasswordConfirm" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="regEmail" required>
+                        <div class="form-text">На этот email можно будет восстановить пароль</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Пол персонажа</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="regSex" id="regSexM" value="M" checked>
+                                <label class="form-check-label" for="regSexM">Мужской</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="regSex" id="regSexF" value="F">
+                                <label class="form-check-label" for="regSexF">Женский</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">Я согласен с <a href="#" class="text-decoration-none">правилами сервера</a></label>
+                    </div>
+                    <div class="alert alert-danger d-none" id="registerError"></div>
+                    <button type="submit" class="btn btn-success w-100">Зарегистрироваться</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <p class="mb-0">Уже есть аккаунт? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" class="text-decoration-none">Войдите</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

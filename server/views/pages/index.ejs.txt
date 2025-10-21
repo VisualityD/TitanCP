@@ -1,0 +1,172 @@
+<%-
+  include('../layout', {
+    body: `
+      <!-- Герой секция -->
+      <section class="hero-section text-center">
+        <div class="container">
+          <h1 class="display-4 fw-bold mb-4">Добро пожаловать в Ragnarok Online</h1>
+          <p class="lead mb-5">Присоединяйтесь к эпическому приключению в загадочном мире Midgard</p>
+          <a href="/download" class="btn btn-danger btn-lg mt-3 me-3">Играть бесплатно</a>
+          <a href="/download" class="btn btn-outline-light btn-lg mt-3">Скачать клиент</a>
+        </div>
+      </section>
+
+      <!-- Статус сервера -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="server-status shadow">
+              <div class="row text-center">
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <h5>Статус сервера</h5>
+                  <span class="status-online"><i class="bi bi-check-circle-fill"></i> ONLINE</span>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <h5>Игроков онлайн</h5>
+                  <span class="fs-4 fw-bold" id="onlineCount">0</span>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <h5>Максимум онлайн</h5>
+                  <span class="fs-4 fw-bold">2,584</span>
+                </div>
+                <div class="col-md-3">
+                  <h5>Версия</h5>
+                  <span class="fs-4 fw-bold">Renewal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Секция возможностей -->
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-5">Почему выбирают наш сервер?</h2>
+          <div class="row g-4">
+            <div class="col-md-4 text-center">
+              <div class="feature-icon">
+                <i class="bi bi-lightning-charge"></i>
+              </div>
+              <h4>Высокая стабильность</h4>
+              <p>99.9% аптайм сервера, защита от DDoS атак, регулярные бэкапы</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="feature-icon">
+                <i class="bi bi-people"></i>
+              </div>
+              <h4>Активное сообщество</h4>
+              <p>Тысячи игроков, гильдии, PvP и WoE события, форум и Discord</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="feature-icon">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <h4>Защита от читеров</h4>
+              <p>Современная античит система, быстрое реагирование на баги</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Секция новостей -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <h2 class="text-center mb-5">Последние новости</h2>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card news-card h-100">
+                <div class="card-body">
+                  <span class="badge bg-danger">Обновление</span>
+                  <h5 class="card-title mt-2">Новое эпическое подземелье</h5>
+                  <p class="card-text">Добавлено новое эпическое подземелье "Храм Древних" с уникальными боссами и наградами.</p>
+                  <a href="#" class="btn btn-sm btn-outline-danger">Читать далее</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card news-card h-100">
+                <div class="card-body">
+                  <span class="badge bg-success">Событие</span>
+                  <h5 class="card-title mt-2">Фестиваль луны</h5>
+                  <p class="card-text">Специальное сезонное событие с ограниченными квестами и уникальными костюмами.</p>
+                  <a href="#" class="btn btn-sm btn-outline-danger">Читать далее</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card news-card h-100">
+                <div class="card-body">
+                  <span class="badge bg-primary">Техработы</span>
+                  <h5 class="card-title mt-2">Обслуживание сервера</h5>
+                  <p class="card-text">27 октября с 10:00 до 14:00 по МСК пройдут плановые технические работы.</p>
+                  <a href="#" class="btn btn-sm btn-outline-danger">Читать далее</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Секция классов -->
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-5">Популярные классы</h2>
+          <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-dark text-white py-4">
+                  <i class="bi bi-shield-slash fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Рыцарь</h5>
+                  <p class="card-text">Мощный воин ближнего боя с высокой защитой и уроном.</p>
+                  <a href="/classes" class="btn btn-outline-dark btn-sm">Подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-primary text-white py-4">
+                  <i class="bi bi-magic fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Волшебник</h5>
+                  <p class="card-text">Мастер разрушительных магических атак и контроля поля боя.</p>
+                  <a href="/classes" class="btn btn-outline-dark btn-sm">Подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-success text-white py-4">
+                  <i class="bi bi-bullseye fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Лучник</h5>
+                  <p class="card-text">Дальнобойный атакующий класс с высокой точностью.</p>
+                  <a href="/classes" class="btn btn-outline-dark btn-sm">Подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="card class-card text-center h-100">
+                <div class="card-img-top bg-warning text-dark py-4">
+                  <i class="bi bi-heart fs-1"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Жрец</h5>
+                  <p class="card-text">Поддерживающий класс с лечением и баффами для группы.</p>
+                  <a href="/classes" class="btn btn-outline-dark btn-sm">Подробнее</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <a href="/classes" class="btn btn-outline-danger">Все классы</a>
+          </div>
+        </div>
+      </section>
+    `
+  })
+%>

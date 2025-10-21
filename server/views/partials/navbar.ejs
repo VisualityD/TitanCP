@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/images/titan-logo.png" alt="Ragnarok Online Logo" class="d-inline-block align-text-top me-2" style="height: 40px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link <%= page === 'home' ? 'active' : '' %>" href="/">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= page === 'server-info' ? 'active' : '' %>" href="/server-info">Сервер</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= page === 'download' ? 'active' : '' %>" href="/download">Скачать</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= page === 'classes' ? 'active' : '' %>" href="#" role="button" data-bs-toggle="dropdown">
+                        Игра
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/classes">Классы</a></li>
+                        <li><a class="dropdown-item" href="#">Гайды</a></li>
+                        <li><a class="dropdown-item" href="#">База знаний</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Карты мира</a></li>
+                        <li><a class="dropdown-item" href="#">Монстры</a></li>
+                        <li><a class="dropdown-item" href="#">Предметы</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Форум</a>
+                </li>
+                <% if (user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link <%= page === 'profile' ? 'active' : '' %>" href="/profile">Личный кабинет</a>
+                    </li>
+                <% } %>
+            </ul>
+            <div class="d-flex">
+                <% if (user) { %>
+				<% if (user && user.groupId === 99) { %>
+				<li class="nav-item">
+				<a class="nav-link <%= page === 'admin' ? 'active' : '' %>" href="/admin">
+				<i class="bi bi-shield-check"></i> Админ-панель
+				</a>
+				</li>
+			<% } %>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <%= user.username %>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><span class="dropdown-item-text small">
+                                <% if (user.groupId === 99) { %>
+                                    <span class="badge bg-danger">Администратор</span>
+                                <% } else { %>
+                                    <span class="badge bg-secondary">Игрок</span>
+                                <% } %>
+                            </span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Личный кабинет</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Выйти</a></li>
+                        </ul>
+                    </div>
+                <% } else { %>
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Вход</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#registerModal">Регистрация</button>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
